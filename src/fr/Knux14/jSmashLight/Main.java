@@ -19,7 +19,7 @@ public class Main {
 	public static int levelUnlocked;
 	public static Font font;
 	public static BufferedImage button_1, button_2, button_3;
-	public static BufferedImage backgrd;
+	public static BufferedImage backgrd, logo;
 	public static BufferedImage case_1, case_2, case_3;
 	
 	public static void main(String args[]) {
@@ -42,6 +42,7 @@ public class Main {
 		try {
 			font = Font.createFont(0, Main.class.getResourceAsStream("res/xolonium.ttf"));
 			backgrd = ImageIO.read(Main.class.getResourceAsStream("res/fond.png"));		
+			logo = ImageIO.read(Main.class.getResourceAsStream("res/logo.png"));		
 			button_1 = ImageIO.read(Main.class.getResourceAsStream("res/button_normal.png"));
 			button_2 = ImageIO.read(Main.class.getResourceAsStream("res/button_surlined.png"));
 			button_3 = ImageIO.read(Main.class.getResourceAsStream("res/button_clic.png"));

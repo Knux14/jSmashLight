@@ -1,6 +1,7 @@
 package fr.Knux14.jSmashLight;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,8 @@ public class GameFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(3);
 		setVisible(true);
-		add(new MainMenuPanel());
+		setResizable(false);
+		add(new MainMenuPanel(getSize()));
 	}
 	
 }
@@ -26,10 +28,14 @@ public class GameFrame extends JFrame {
 class MainMenuPanel extends JPanel {
 
 	private static final long serialVersionUID = 8505092482254750780L;
-	Button play, options, exit;
-	
-	public MainMenuPanel() {
-		play = new Button("Jouer", new ActionListener(){
+	Button[] bt = new Button[3];
+	int posYlogo = 10;
+	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
+
+	public MainMenuPanel(Dimension d) {
+		setSize(d);
+		setPreferredSize(d);
+		bt[0] = new Button("Jouer", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -38,7 +44,7 @@ class MainMenuPanel extends JPanel {
 			
 		});
 		
-		options = new Button("Options", new ActionListener(){
+		bt[1] = new Button("Options", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -47,7 +53,7 @@ class MainMenuPanel extends JPanel {
 			
 		});
 		
-		exit = new Button("Quitter", new ActionListener(){
+		bt[2] = new Button("Quitter", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -55,6 +61,12 @@ class MainMenuPanel extends JPanel {
 			}
 			
 		});
+		setLayout(null);
+		
+		for (int i = 0; i < bt.length; i++) {
+			bt[i].setLocation(getWidth() / 2 - bt[i].getWidth() / 2, posYlogo + ySizeLogo + 70 + (Main.button_1.getHeight() + 20)  * i);
+			add(bt[i]);
+		}
 	}
 	
 	@Override
@@ -62,6 +74,7 @@ class MainMenuPanel extends JPanel {
 		g.setColor(Color.black);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		g.drawImage(Main.backgrd, 0, 0, null);
+		g.drawImage(Main.logo, (getWidth() / 2) - (xSizeLogo /2), posYlogo, xSizeLogo, ySizeLogo, null);
 	}
 	
 }

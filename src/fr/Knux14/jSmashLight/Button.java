@@ -20,10 +20,12 @@ public class Button extends JPanel implements MouseListener {
 	private boolean isClic;
 	
 	public Button(String title, ActionListener act) {
+		this.setSize(Main.button_1.getWidth(), Main.button_1.getHeight());
 		this.title = title;
 		this.action = act;
 		img = Main.button_1;
 		isClic = false;
+		addMouseListener(this);
 	}
 	
 	
@@ -44,6 +46,7 @@ public class Button extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		img = Main.button_3;
 		action.actionPerformed(null);
+		repaint();
 	}
 
 
@@ -55,6 +58,7 @@ public class Button extends JPanel implements MouseListener {
 		} else {
 			img = Main.button_2;
 		}
+		repaint();
 	}
 
 
@@ -62,6 +66,7 @@ public class Button extends JPanel implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		img = Main.button_1;
+		repaint();
 	}
 
 
@@ -70,6 +75,7 @@ public class Button extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent arg0) {
 		img = Main.button_3;		
 		isClic = true;
+		repaint();
 	}
 
 
@@ -82,6 +88,7 @@ public class Button extends JPanel implements MouseListener {
 			img = Main.button_1;
 		}
 		isClic = false;
+		repaint();
 	}
 	
 	private boolean isIn (MouseEvent e) {
