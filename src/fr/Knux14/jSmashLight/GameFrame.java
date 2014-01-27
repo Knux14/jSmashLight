@@ -25,7 +25,7 @@ public class GameFrame extends JFrame {
 	
 }
 
-class MainMenuPanel extends JPanel {
+class MainMenuPanel extends Panel {
 
 	private static final long serialVersionUID = 8505092482254750780L;
 	Button[] bt = new Button[4];
@@ -33,8 +33,7 @@ class MainMenuPanel extends JPanel {
 	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
 
 	public MainMenuPanel(Dimension d) {
-		setSize(d);
-		setPreferredSize(d);
+		super(d, null);
 		bt[0] = new Button("Jouer", new ActionListener(){
 
 			@Override
@@ -76,6 +75,12 @@ class MainMenuPanel extends JPanel {
 			bt[i].setLocation(getWidth() / 2 - bt[i].getWidth() / 2, posYlogo + ySizeLogo + 50 + (Main.button_1.getHeight() + 20)  * i);
 			add(bt[i]);
 		}
+	}
+	
+	public void changePanel(JPanel newPan)
+	{
+		getParent().remove(this);
+		getParent().add(new Panel(this.getSize(), this));
 	}
 	
 	@Override
