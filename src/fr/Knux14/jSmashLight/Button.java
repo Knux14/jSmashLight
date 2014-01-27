@@ -26,6 +26,7 @@ public class Button extends JPanel implements MouseListener {
 		img = Main.button_1;
 		isClic = false;
 		addMouseListener(this);
+		setBackground(new Color(0f, 0f, 0f, 0f));
 	}
 	
 	

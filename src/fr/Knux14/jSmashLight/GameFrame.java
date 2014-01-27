@@ -28,7 +28,7 @@ public class GameFrame extends JFrame {
 class MainMenuPanel extends JPanel {
 
 	private static final long serialVersionUID = 8505092482254750780L;
-	Button[] bt = new Button[3];
+	Button[] bt = new Button[4];
 	int posYlogo = 10;
 	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
 
@@ -53,7 +53,16 @@ class MainMenuPanel extends JPanel {
 			
 		});
 		
-		bt[2] = new Button("Quitter", new ActionListener(){
+		bt[2] = new Button("Scores", new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+								
+			}
+			
+		});
+		
+		bt[3] = new Button("Quitter", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -64,7 +73,7 @@ class MainMenuPanel extends JPanel {
 		setLayout(null);
 		
 		for (int i = 0; i < bt.length; i++) {
-			bt[i].setLocation(getWidth() / 2 - bt[i].getWidth() / 2, posYlogo + ySizeLogo + 70 + (Main.button_1.getHeight() + 20)  * i);
+			bt[i].setLocation(getWidth() / 2 - bt[i].getWidth() / 2, posYlogo + ySizeLogo + 50 + (Main.button_1.getHeight() + 20)  * i);
 			add(bt[i]);
 		}
 	}
