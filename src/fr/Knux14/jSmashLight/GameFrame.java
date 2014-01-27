@@ -31,7 +31,7 @@ class MainMenuPanel extends Panel {
 	Button[] bt = new Button[4];
 	int posYlogo = 10;
 	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
-
+	PanelHighscores panel;
 	public MainMenuPanel(Dimension d) {
 		super(d, null);
 		bt[0] = new Button("Jouer", new ActionListener(){
@@ -56,7 +56,8 @@ class MainMenuPanel extends Panel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-								
+				updatePanel();
+				changePanel(panel);
 			}
 			
 		});
@@ -76,7 +77,9 @@ class MainMenuPanel extends Panel {
 			add(bt[i]);
 		}
 	}
-	
+	public void updatePanel() {
+		panel = new PanelHighscores(getSize(), panel);
+	}
 	public void changePanel(JPanel newPan)
 	{
 		getParent().remove(this);
