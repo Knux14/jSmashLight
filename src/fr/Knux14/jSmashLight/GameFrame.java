@@ -1,13 +1,16 @@
 package fr.Knux14.jSmashLight;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
+import fr.Knux14.jSmashLight.Gui.Panel;
+import fr.Knux14.jSmashLight.Gui.PanelHighscores;
 
 public class GameFrame extends JFrame {
 
@@ -28,69 +31,69 @@ public class GameFrame extends JFrame {
 class MainMenuPanel extends Panel {
 
 	private static final long serialVersionUID = 8505092482254750780L;
-	Button[] bt = new Button[4];
 	int posYlogo = 10;
 	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
-	PanelHighscores panel;
+	PanelHighscores score;
+	
 	public MainMenuPanel(Dimension d) {
-		super(d, null);
-		bt[0] = new Button("Jouer", new ActionListener(){
+		super(d, null, null);
+		score = new PanelHighscores(d, getParent(), this);
+		btList.add(new Button("Jouer", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 								
 			}
 			
-		});
+		}));
 		
-		bt[1] = new Button("Options", new ActionListener(){
+		btList.add(new Button("Options", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 								
 			}
 			
-		});
+		}));
 		
-		bt[2] = new Button("Scores", new ActionListener(){
+		btList.add(new Button("Scores", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				updatePanel();
-				changePanel(panel);
+				score.updateScore();
+				changePanel(score);
 			}
 			
-		});
+		}));
 		
-		bt[3] = new Button("Quitter", new ActionListener(){
+		btList.add(new Button("Quitter", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 			
-		});
+		}));
 		setLayout(null);
-		
-		for (int i = 0; i < bt.length; i++) {
-			bt[i].setLocation(getWidth() / 2 - bt[i].getWidth() / 2, posYlogo + ySizeLogo + 50 + (Main.button_1.getHeight() + 20)  * i);
-			add(bt[i]);
+		for (int i = 0; i < btList.size(); i++) {
+			btList.get(i).setLocation(getWidth() / 2 - btList.get(i).getWidth() / 2, posYlogo + ySizeLogo + 50 + (Main.button_1.getHeight() + 20)  * i);
+			add(btList.get(i));
 		}
 	}
-	public void updatePanel() {
-		panel = new PanelHighscores(getSize(), panel);
-	}
-	public void changePanel(JPanel newPan)
+
+	public void changePanel(Panel newPan)
 	{
-		getParent().remove(this);
-		getParent().add(new Panel(this.getSize(), this));
+		Container c = getParent();
+		c.add(newPan);
+		c.remove(this);
+		c.revalidate();
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(Color.black);
 		g.drawRect(0, 0, getWidth(), getHeight());
-		g.drawImage(Main.backgrd, 0, 0, null);
 		g.drawImage(Main.logo, (getWidth() / 2) - (xSizeLogo /2), posYlogo, xSizeLogo, ySizeLogo, null);
 	}
 	
