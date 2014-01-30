@@ -1,4 +1,4 @@
-package fr.Knux14.jSmashLight;
+package fr.Knux14.jSmashLight.Gui;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import fr.Knux14.jSmashLight.Main;
+
 public class Button extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 2856490418850100776L;
@@ -19,7 +21,7 @@ public class Button extends JPanel implements MouseListener {
 	private BufferedImage img;
 	private boolean isClic;
 	
-	public Button(String title, ActionListener act) {
+	public Button(String title, ActionListener act, Point point) {
 		this.setSize(Main.button_1.getWidth(), Main.button_1.getHeight());
 		this.title = title;
 		this.action = act;
@@ -27,6 +29,7 @@ public class Button extends JPanel implements MouseListener {
 		isClic = false;
 		addMouseListener(this);
 		setBackground(new Color(0f, 0f, 0f, 0f));
+		setLocation(point);
 	}
 	
 	

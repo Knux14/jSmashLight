@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import fr.Knux14.jSmashLight.Button;
 import fr.Knux14.jSmashLight.Main;
 
 public class Panel extends JPanel {
@@ -18,6 +17,7 @@ public class Panel extends JPanel {
 	Panel mainmenu;
 	
 	public Panel (Dimension d, Container container, final Panel mainmenu) {
+		setLayout(null);
 		this.parent = container;
 		this.mainmenu = mainmenu;
 		setSize(d);
@@ -38,6 +38,12 @@ public class Panel extends JPanel {
 		newPan.repaint();
 		for (Button b : newPan.btList) {
 			b.repaint();
+		}
+	}
+	
+	public void initButtons() {
+		for (Button b : btList) {
+			add(b);
 		}
 	}
 	

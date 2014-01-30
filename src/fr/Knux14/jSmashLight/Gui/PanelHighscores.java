@@ -14,7 +14,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import fr.Knux14.jSmashLight.Button;
 import fr.Knux14.jSmashLight.Main;
 import fr.Knux14.jSmashLight.Score.Score;
 import fr.Knux14.jSmashLight.Score.ScoreboardManager;
@@ -50,12 +49,8 @@ public class PanelHighscores extends Panel{
 			public void actionPerformed(ActionEvent e) {
 				changePanel(main);				
 			}
-		}));
-		for (int i = 0; i < btList.size(); i++) {
-			btList.get(i).setLocation(getWidth() / 2 - btList.get(i).getWidth() / 2, 600 - 100);
-			System.out.println(btList.get(i).getLocation().x + " " + btList.get(i).getLocation().y);
-			add(btList.get(i));
-		}
+		}, new java.awt.Point(getWidth() / 2 - 100, 600 - 100)));
+		initButtons();
 	}
 
 	public void updateScore() {
