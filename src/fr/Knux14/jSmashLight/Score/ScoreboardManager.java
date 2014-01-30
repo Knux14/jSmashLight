@@ -35,6 +35,7 @@ public class ScoreboardManager {
 		updateScoreFile();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void loadScoreFile() {
 		try {
 			inputStream = new ObjectInputStream(new FileInputStream(FILE));
