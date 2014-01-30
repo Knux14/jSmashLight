@@ -28,9 +28,11 @@ public class PanelHighscores extends Panel{
 	public PanelHighscores(Dimension d, Container container, Panel main) {
 		super(d, container, main);
 		sbm = new ScoreboardManager();
-		scorelist = new JList<>();
-		scorelist.setCellRenderer(new CellRenderer());
+		scorelist = new JList<>();      // <== Cette ligne empeche le main menu de s'afficher 
+		scorelist.setCellRenderer(new CellRenderer()); 
+		scorelist.setBackground(Color.CYAN);
 		JScrollPane jsp = new JScrollPane(scorelist);
+		jsp.setBackground(Color.green);
 		jsp.setLocation(getWidth() / 2 - 100, Main.logo.getHeight() + posYlogo + 10);
 		int size = getHeight() - (Main.logo.getHeight() + posYlogo + 30 + Main.button_1.getHeight());
 		jsp.setSize(200, size);
@@ -50,15 +52,13 @@ public class PanelHighscores extends Panel{
      			listModel.addElement(scoreListPan.get(index));
 		}
  
-		scorelist.setModel(listModel);
+	//	scorelist.setModel(listModel);
 	}
 	
 	@Override
 	public void paintComponent (Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(Main.logo, (getWidth() / 2) - (xSizeLogo /2), posYlogo, xSizeLogo, ySizeLogo, null);
-		g.setColor(new Color(140, 140, 140));
-		g.drawRect(10, posYlogo + ySizeLogo + 10, getWidth() - 20, 100);
 	}
 	
 }
