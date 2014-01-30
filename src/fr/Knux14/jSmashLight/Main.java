@@ -24,6 +24,7 @@ public class Main {
 	public static BufferedImage backgrd, logo;
 	public static BufferedImage case_1, case_2, case_3;
 	public static String gamemode;
+	public static int size = 3;
 	
 	public static void main(String args[]) {
 		try {
