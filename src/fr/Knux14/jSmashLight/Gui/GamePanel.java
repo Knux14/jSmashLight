@@ -20,7 +20,7 @@ public class GamePanel extends Panel {
 	private static final long serialVersionUID = -1010103893984671971L;
 	private Panel main;
 	private Dimension dim;
-	private TopPanel top;
+	public TopPanel top;
 	private CenterPanel center;
 	public boolean running;
 	public int remaining = 100;
@@ -56,7 +56,7 @@ public class GamePanel extends Panel {
 		add(top, BorderLayout.NORTH);
 		add(center, BorderLayout.CENTER);
 		running = true;
-		ThreadChrono tc = new ThreadChrono(this, top);
+		ThreadChrono tc = new ThreadChrono(this);
 		tc.start();
 	}
 	

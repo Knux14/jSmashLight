@@ -11,13 +11,13 @@ import fr.Knux14.jSmashLight.Main;
 public class TopPanel extends JPanel {
 
 	GamePanel gp;
-	public JLabel timelab;
+	public JLabel timelab, remainslab;
 	
 	public TopPanel(GamePanel gamePanel) {
 		Dimension d = new Dimension(500, 80);
 		setSize(d);
 		setPreferredSize(d);
-		setBackground(new Color(135, 135, 135, 135));
+		setBackground(new Color(135, 135, 135));
 		setLayout(null);
 		this.gp = gamePanel;
 		timelab = new JLabel("Time:");
@@ -25,7 +25,16 @@ public class TopPanel extends JPanel {
 		timelab.setSize(200, 20);	
 		timelab.setFont(Main.font.deriveFont(15f));
 		timelab.setForeground(Color.white);
+		timelab.setBackground(new Color(0, 0, 0, 0));
 		add(timelab);
+		
+		remainslab = new JLabel("Remains: " + gamePanel.remaining);
+		remainslab.setLocation(20, 40);
+		remainslab.setSize(200, 20);	
+		remainslab.setFont(Main.font.deriveFont(15f));
+		remainslab.setForeground(Color.white);
+		remainslab.setBackground(new Color(0, 0, 0, 0));
+		add(remainslab);
 	}
 }
 

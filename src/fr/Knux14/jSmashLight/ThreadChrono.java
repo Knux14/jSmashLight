@@ -10,41 +10,43 @@ import fr.Knux14.jSmashLight.Gui.TopPanel;
 
 public class ThreadChrono extends Thread {
 
-	  long startTime;
-	  long ms;
-	  long sec;
-	  long min;
-	  boolean gameRunning;
-	  JLabel toUpdate;
-
-	  public ThreadChrono (GamePanel game, TopPanel pan) {
-		  this.gameRunning = game.running;
-		  this.toUpdate = pan.timelab;
-	  }
-	  
-	  public void run()
-	  {
-	    startTime = System.nanoTime();
-	    sec = 0L;
-	    min = 0L;
-	    while (gameRunning) {
-	      ms = (System.nanoTime() - startTime);
-	      ms /= 1000000L;
-	      if (ms >= 1000L) {
-	        sec += 1L;
-	        ms -= 1000L;
-	      }
-	      if (sec >= 60L) {
-	        sec -= 60L;
-	        min += 1L;
-	      }
-	      try {
-	        Thread.sleep(100L);
-	      }
-	      catch (InterruptedException e) {
-	        e.printStackTrace();
-	      }
-	      
-	    }
-	  }
+	private GamePanel game;
+	private long start;
+	
+	public long ms = 0, secondes = 0, minutes = 0, heures = 0;
+	
+	public ThreadChrono(GamePanel game) {
+		this.game = game;
 	}
+
+	public void run() {
+		start = System.nanoTime();
+		while (game.running) {
+			ms = (System.nanoTime() - start);
+		    ms /= 1000000L;
+			while (ms > 1000) {
+				secondes ++;
+				ms -= 1000;
+			}
+			
+			while (secondes > 60) {
+				minutes ++;
+				secondes -= 60;
+			}
+			while (minutes > 60) {
+				heures++;
+				minutes -= 60;
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {}
+			updateCounters();
+		}
+	}
+	
+	public void updateCounters() {
+		game.top.remainslab.setText("Coups restant: " + game.remaining);
+		game.top.timelab.setText("Temps: " + heures + ":" + minutes + ":" + secondes + ":" + ms);
+	}
+	
+}
