@@ -13,6 +13,8 @@ import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 
+import fr.Knux14.jSmashLight.Score.ScoreboardManager;
+
 public class Main {
 
 	public static FileConfiguration config;

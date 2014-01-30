@@ -1,8 +1,8 @@
 package fr.Knux14.jSmashLight;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +19,7 @@ public class GameFrame extends JFrame {
 
 	public GameFrame() {
 		setSize(500, 600);
-		setTitle("jSmashLight");
+		setTitle("jSmashLights");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(3);
 		setVisible(true);
@@ -90,6 +90,13 @@ class MainMenuPanel extends Panel {
 		g.setColor(Color.black);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		g.drawImage(Main.logo, (getWidth() / 2) - (xSizeLogo /2), posYlogo, xSizeLogo, ySizeLogo, null);
+		g.setColor(new Color(135, 135, 135));
+		String title = "Version 2.0 - Rewritten", website = "http://feedtheknux.url.ph/";
+		FontMetrics fm = g.getFontMetrics();
+		int x = (getWidth() - fm.stringWidth(title)) / 2, x2 = (getWidth() - fm.stringWidth(title)) / 2;
+		g.drawString(title, x, getHeight() - 12);
+		g.drawString(website, x2, getHeight() - 27);
+		
 	}
 	
 }

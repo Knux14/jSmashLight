@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -32,14 +33,17 @@ public class PanelHighscores extends Panel{
 		super(d, container, main);
 		setLayout(null);
 		sbm = new ScoreboardManager();
-		scorelist = new JList<>();      // <== Cette ligne empeche le main menu de s'afficher 
+		scorelist = new JList<>();    
 		scorelist.setCellRenderer(new CellRenderer()); 
 		JScrollPane jsp = new JScrollPane(scorelist);
-		jsp.setLocation(getWidth() / 2 - 100, Main.logo.getHeight() + posYlogo + 10);
-		int size = getHeight() - (Main.logo.getHeight() + posYlogo + 30 + Main.button_1.getHeight());
-		System.out.println(getHeight() + " " + size);
-		jsp.setSize(200, size);
+		jsp.setLocation(getWidth() / 2 - 150, 200);
+		int size = getHeight() - (315);
+		jsp.setSize(300, size);
 		add (jsp);
+		scorelist.setBackground(new Color(135, 135, 135, 0));
+		scorelist.setBorder(BorderFactory.createEmptyBorder());
+		jsp.setBackground(new Color(135, 135, 135, 0));
+		jsp.setBorder(BorderFactory.createEmptyBorder());
 		btList.add(new Button("Revenir", new ActionListener() {
 			
 			@Override
@@ -48,7 +52,7 @@ public class PanelHighscores extends Panel{
 			}
 		}));
 		for (int i = 0; i < btList.size(); i++) {
-			btList.get(i).setLocation(getWidth() / 2 - btList.get(i).getWidth() / 2, getHeight() - btList.get(i).getHeight() + 10);
+			btList.get(i).setLocation(getWidth() / 2 - btList.get(i).getWidth() / 2, 600 - 100);
 			System.out.println(btList.get(i).getLocation().x + " " + btList.get(i).getLocation().y);
 			add(btList.get(i));
 		}

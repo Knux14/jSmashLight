@@ -11,6 +11,7 @@ public class CellRenderer implements ListCellRenderer<JPanel> {
 	@Override
 	public Component getListCellRendererComponent(JList<? extends JPanel> list,
 			JPanel value, int index, boolean isSelected, boolean cellHasFocus) {
+		value.repaint();
 		return value;
 	}
 

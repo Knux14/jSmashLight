@@ -16,16 +16,19 @@ public class PanelScore extends JPanel {
 	int hours, minutes, second;
 
 	public PanelScore (int id, Score score) {
-		setSize(200, 80);
-		setPreferredSize(new Dimension(200, 80));
-		setBackground(new Color(0f, 0f, 0f, 0f));
+		setSize(200, 30);
+		setPreferredSize(new Dimension(200, 30));
+		setBackground(new Color(135, 135, 135));
 		this.scr = score;
 		this.id = id;
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.drawString("#" + id + ": " + scr.getName(), 10, 10);
-		g.drawString("Temps: " + getStringTime(), 20, 20);
+		g.setColor(new Color(135, 135, 135));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.black);
+		g.drawString("#" + id + ": " + scr.getName(), 25, 15);
+		g.drawString("Temps: " + getStringTime(), 150, 15);
 		g.setColor(Color.white);
 		g.drawRect(1, 1, getWidth() - 1, getHeight()-1);
 	}
