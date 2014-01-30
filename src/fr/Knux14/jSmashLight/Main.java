@@ -21,6 +21,7 @@ public class Main {
 	public static BufferedImage button_1, button_2, button_3;
 	public static BufferedImage backgrd, logo;
 	public static BufferedImage case_1, case_2, case_3;
+	public static String gamemode;
 	
 	public static void main(String args[]) {
 		try {
@@ -29,7 +30,7 @@ public class Main {
 			config = new PropertiesConfiguration("config.ini");
 			config.setAutoSave(true);
 			config.setReloadingStrategy(new FileChangedReloadingStrategy());
-			levelUnlocked = config.getInt("level", 0);
+			gamemode = config.getString("gamemode", "click");
 			loadPict();
 			new GameFrame();
 		} catch (ConfigurationException | IOException e) {

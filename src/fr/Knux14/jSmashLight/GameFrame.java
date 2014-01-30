@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import fr.Knux14.jSmashLight.Gui.GamePanel;
 import fr.Knux14.jSmashLight.Gui.Panel;
 import fr.Knux14.jSmashLight.Gui.PanelHighscores;
 
@@ -33,16 +34,17 @@ class MainMenuPanel extends Panel {
 	private static final long serialVersionUID = 8505092482254750780L;
 	int posYlogo = 10;
 	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
-	PanelHighscores score;
 	
-	public MainMenuPanel(Dimension d) {
+	public MainMenuPanel(final Dimension d) {
 		super(d, null, null);
-		score = new PanelHighscores(d, getParent(), this);
+		final MainMenuPanel instance = this;
+		
 		btList.add(new Button("Jouer", new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-								
+				GamePanel gamepan = new GamePanel(d, getParent(), instance);
+				changePanel(gamepan);
 			}
 			
 		}));
@@ -60,6 +62,7 @@ class MainMenuPanel extends Panel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				PanelHighscores score = new PanelHighscores(d, getParent(), instance);
 				score.updateScore();
 				changePanel(score);
 			}
@@ -81,14 +84,6 @@ class MainMenuPanel extends Panel {
 		}
 	}
 
-	public void changePanel(Panel newPan)
-	{
-		Container c = getParent();
-		c.add(newPan);
-		c.remove(this);
-		c.revalidate();
-	}
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

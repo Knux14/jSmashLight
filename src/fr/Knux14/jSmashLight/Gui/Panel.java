@@ -17,7 +17,7 @@ public class Panel extends JPanel {
 	protected ArrayList<Button> btList;
 	Panel mainmenu;
 	
-	public Panel (Dimension d, Container container, Panel mainmenu) {
+	public Panel (Dimension d, Container container, final Panel mainmenu) {
 		this.parent = container;
 		this.mainmenu = mainmenu;
 		setSize(d);
@@ -27,6 +27,18 @@ public class Panel extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		g.drawImage(Main.backgrd, 0, 0, null);
+	}
+
+	public void changePanel(Panel newPan)
+	{
+		Container c = getParent();
+		c.add(newPan);
+		c.remove(this);
+		c.revalidate();
+		newPan.repaint();
+		for (Button b : newPan.btList) {
+			b.repaint();
+		}
 	}
 	
 }
