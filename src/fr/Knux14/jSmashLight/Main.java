@@ -32,6 +32,7 @@ public class Main {
 			config.setAutoSave(true);
 			config.setReloadingStrategy(new FileChangedReloadingStrategy());
 			gamemode = config.getString("gamemode", "click");
+			config.save();
 			loadPict();
 			new GameFrame();
 		} catch (ConfigurationException | IOException e) {

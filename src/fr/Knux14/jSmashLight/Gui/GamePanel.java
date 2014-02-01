@@ -22,7 +22,7 @@ public class GamePanel extends Panel {
 	public TopPanel top;
 	private CenterPanel center;
 	public boolean running;
-	public int remaining = 100, errors = 0;
+	public int remaining = 5, errors = 0;
 	public boolean canClick = true;
 	public ArrayList<Case> caseList;
 	public int oldCase1, oldCase2;

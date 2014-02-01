@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.Knux14.jSmashLight.Main;
+import fr.Knux14.jSmashLight.Score.ScoreboardManager;
 
 public class GameWin extends Panel {
 
 	private static final long serialVersionUID = 7576214204174364621L;
 	JLabel score;
 	JTextField pseudo;
+	int posYlogo = 10;
+	int xSizeLogo = Main.logo.getWidth() / 2, ySizeLogo = Main.logo.getHeight() / 2;
 	
 	public GameWin(Dimension d, Container container, Panel mainmenu, final GamePanel pan) {
 		super(d, container, mainmenu);
@@ -50,14 +54,24 @@ public class GameWin extends Panel {
 			public void actionPerformed(ActionEvent arg0) {
 				changePanel(pan.mainmenu);
 			}
-		}, new Point(10, 510)));
+		}, new Point(10, 505)));
 		
 		btList.add(new Button("Sauvegarder", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				changePanel(pan.mainmenu);
+				if (!pseudo.getText().isEmpty()){
+					ScoreboardManager sc = new ScoreboardManager();
+					sc.addScore(pseudo.getText(), pan.tc.getScore(), Main.size, pan.errors);
+					changePanel(pan.mainmenu);
+				}
 			}
-		}, new Point(220, 510)));
+		}, new Point(280, 505)));
+		initButtons();
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(Main.logo, (getWidth() / 2) - (xSizeLogo /2), posYlogo, xSizeLogo, ySizeLogo, null);
 	}
 
 }

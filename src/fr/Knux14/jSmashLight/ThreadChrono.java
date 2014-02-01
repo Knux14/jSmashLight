@@ -43,6 +43,11 @@ public class ThreadChrono {
 	public void updateCounters() {
 		game.top.remainslab.setText("Coups restant: " + game.remaining);
 		game.top.timelab.setText("Temps: " + heures + ":" + minutes + ":" + secondes + ":" + ms);
+		game.top.errorsLab.setText("Erreurs: " + game.errors);
+	}
+
+	public int getScore() {
+		return ms + secondes * 1000 + minutes * 60000 + heures * 60*60000;
 	}
 	
 }
