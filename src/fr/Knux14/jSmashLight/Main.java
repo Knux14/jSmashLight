@@ -13,8 +13,6 @@ import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
 
-import fr.Knux14.jSmashLight.Score.ScoreboardManager;
-
 public class Main {
 
 	public static FileConfiguration config;
@@ -24,7 +22,7 @@ public class Main {
 	public static BufferedImage backgrd, logo;
 	public static BufferedImage case_1, case_2, case_3;
 	public static String gamemode;
-	public static int size = 3;
+	public static int size = 2;
 	
 	public static void main(String args[]) {
 		try {

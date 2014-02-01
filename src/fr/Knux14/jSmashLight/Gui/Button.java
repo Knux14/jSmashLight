@@ -35,6 +35,7 @@ public class Button extends JPanel implements MouseListener {
 	
 	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
 		g.setFont(Main.font.deriveFont(24f));
 		g.setColor(Color.white);
@@ -50,6 +51,7 @@ public class Button extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		img = Main.button_3;
 		action.actionPerformed(null);
+		Panel.refreshAll();
 		repaint();
 	}
 
@@ -62,6 +64,7 @@ public class Button extends JPanel implements MouseListener {
 		} else {
 			img = Main.button_2;
 		}
+		Panel.refreshAll();
 		repaint();
 	}
 
@@ -70,6 +73,7 @@ public class Button extends JPanel implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		img = Main.button_1;
+		Panel.refreshAll();
 		repaint();
 	}
 
@@ -79,6 +83,7 @@ public class Button extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent arg0) {
 		img = Main.button_3;		
 		isClic = true;
+		Panel.refreshAll();
 		repaint();
 	}
 
@@ -92,6 +97,7 @@ public class Button extends JPanel implements MouseListener {
 			img = Main.button_1;
 		}
 		isClic = false;
+		Panel.refreshAll();
 		repaint();
 	}
 	

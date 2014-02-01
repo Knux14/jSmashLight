@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
-import javax.swing.text.GapContent;
 
 import fr.Knux14.jSmashLight.Main;
 import fr.Knux14.jSmashLight.ThreadChrono;
@@ -23,10 +22,11 @@ public class GamePanel extends Panel {
 	public TopPanel top;
 	private CenterPanel center;
 	public boolean running;
-	public int remaining = 100;
+	public int remaining = 100, errors = 0;
 	public boolean canClick = true;
-	ArrayList<Case> caseList;
+	public ArrayList<Case> caseList;
 	public int oldCase1, oldCase2;
+	public ThreadChrono tc;
 	
 	public GamePanel(Dimension d, Container container, Panel mainmenu) {
 		super(d, container, mainmenu);
@@ -44,20 +44,31 @@ public class GamePanel extends Panel {
 		int random2 = r.nextInt(caseList.size());
 		while (random1 == random2) random2 = r.nextInt(caseList.size());
 		Case c2 = caseList.get(r.nextInt(caseList.size()));
- 		System.out.println(random1 + "  " + random2);
 
  		c1.setCase(1);
  		oldCase1 = c1.getId();
  		c2.setCase(2);
  		oldCase2 = c2.getId();
- 		
+
 		top = new TopPanel(this);
 		center = new CenterPanel(this);
 		add(top, BorderLayout.NORTH);
 		add(center, BorderLayout.CENTER);
 		running = true;
-		ThreadChrono tc = new ThreadChrono(this);
-		tc.start();
+		tc = new ThreadChrono(this);
+		new Thread() {
+			@Override
+			public void run() {
+				while (running) {
+					tc.updateCounters();
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
 	}
 	
 	@Override
@@ -76,7 +87,7 @@ public class GamePanel extends Panel {
 
 	public void end() {
 		running = false;
-		changePanel(new GameWin(dim, getParent(), main));
+		changePanel(new GameWin(dim, getParent(), main, this));
 	}
 	
 }
@@ -84,6 +95,7 @@ public class GamePanel extends Panel {
 
 class CenterPanel extends JPanel {
 
+	private static final long serialVersionUID = -3092778894123177157L;
 	GamePanel gp;
 	GridLayout lay;
 	
@@ -100,9 +112,10 @@ class CenterPanel extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		if (!gp.canClick){
-			g.setColor(new Color (249, 255, 143, 75));
+			g.setColor(new Color (249, 255, 143, 150));
 			g.fillRect(0, 0, getWidth(), getHeight());
-		}
+		} 
 	}
 }

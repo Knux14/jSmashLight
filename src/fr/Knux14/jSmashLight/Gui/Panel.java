@@ -12,6 +12,7 @@ import fr.Knux14.jSmashLight.Main;
 public class Panel extends JPanel {
 
 	private static final long serialVersionUID = 9109392102093195371L;
+	private static ArrayList<Panel> panelList = new ArrayList<>();
 	Container parent;
 	protected ArrayList<Button> btList;
 	Panel mainmenu;
@@ -23,10 +24,12 @@ public class Panel extends JPanel {
 		setSize(d);
 		setPreferredSize(d);
 		btList = new ArrayList<>();
+		panelList.add(this);
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.drawImage(Main.backgrd, 0, 0, null);
+		super.paintComponent(g);
+		g.drawImage(Main.backgrd, 0, 0, getWidth(), getHeight(), null);
 	}
 
 	public void changePanel(Panel newPan)
@@ -44,6 +47,12 @@ public class Panel extends JPanel {
 	public void initButtons() {
 		for (Button b : btList) {
 			add(b);
+		}
+	}
+	
+	public static void refreshAll() {
+		for (Panel p : panelList) {
+			p.repaint();
 		}
 	}
 	

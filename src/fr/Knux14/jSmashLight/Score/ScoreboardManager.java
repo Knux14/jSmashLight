@@ -29,9 +29,9 @@ public class ScoreboardManager {
 		Collections.sort(scores, comparator);
 	}
 
-	public void addScore(String name, int score) {
+	public void addScore(String name, int score, int size, int errors) {
 		loadScoreFile();
-		scores.add(new Score(name, score));
+		scores.add(new Score(name, score, size, errors));
 		updateScoreFile();
 	}
 
@@ -41,11 +41,11 @@ public class ScoreboardManager {
 			inputStream = new ObjectInputStream(new FileInputStream(FILE));
 			scores = (ArrayList<Score>) inputStream.readObject();
 		} catch (FileNotFoundException e) {
-			System.out.println("[Laad] FNF Error: " + e.getMessage());
+			System.out.println("[Scoreboard Manager: Loading] FNF Error: " + e.getMessage());
 		} catch (IOException e) {
-			System.out.println("[Laad] IO Error: " + e.getMessage());
+			System.out.println("[Scoreboard Manager: Loading] IO Error: " + e.getMessage());
 		} catch (ClassNotFoundException e) {
-			System.out.println("[Laad] CNF Error: " + e.getMessage());
+			System.out.println("[Scoreboard Manager: Loading] CNF Error: " + e.getMessage());
 		} finally {
 			try {
 				if (outputStream != null) {
@@ -53,7 +53,7 @@ public class ScoreboardManager {
 					outputStream.close();
 				}
 			} catch (IOException e) {
-				System.out.println("[Laad] IO Error: " + e.getMessage());
+				System.out.println("[Scoreboard Manager: Loading] IO Error: " + e.getMessage());
 			}
 		}
 	}
@@ -63,9 +63,9 @@ public class ScoreboardManager {
             outputStream = new ObjectOutputStream(new FileOutputStream(FILE));
             outputStream.writeObject(scores);
         } catch (FileNotFoundException e) {
-            System.out.println("[Update] FNF Error: " + e.getMessage() + ",the program will try and make a new file");
+            System.out.println("[Scoreboard Manager: Save] FNF Error: " + e.getMessage() + ",the program will try and make a new file");
         } catch (IOException e) {
-            System.out.println("[Update] IO Error: " + e.getMessage());
+            System.out.println("[Scoreboard Manager: Save] IO Error: " + e.getMessage());
         } finally {
             try {
                 if (outputStream != null) {
@@ -73,7 +73,7 @@ public class ScoreboardManager {
                     outputStream.close();
                 }
             } catch (IOException e) {
-                System.out.println("[Update] Error: " + e.getMessage());
+                System.out.println("[Scoreboard Manager: Save] Error: " + e.getMessage());
             }
         }
 	}

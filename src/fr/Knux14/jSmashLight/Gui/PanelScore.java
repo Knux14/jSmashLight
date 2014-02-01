@@ -24,6 +24,7 @@ public class PanelScore extends JPanel {
 	}
 	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(new Color(135, 135, 135));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);

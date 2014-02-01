@@ -10,10 +10,11 @@ import fr.Knux14.jSmashLight.Main;
 
 public class TopPanel extends JPanel {
 
+	private static final long serialVersionUID = -8837127881810200854L;
 	GamePanel gp;
 	public JLabel timelab, remainslab;
 	
-	public TopPanel(GamePanel gamePanel) {
+	public TopPanel(final GamePanel gamePanel) {
 		Dimension d = new Dimension(500, 80);
 		setSize(d);
 		setPreferredSize(d);
@@ -35,7 +36,9 @@ public class TopPanel extends JPanel {
 		remainslab.setForeground(Color.white);
 		remainslab.setBackground(new Color(0, 0, 0, 0));
 		add(remainslab);
+		
 	}
+	
 }
 
 

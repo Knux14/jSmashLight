@@ -1,6 +1,6 @@
 package fr.Knux14.jSmashLight.Gui;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 import fr.Knux14.jSmashLight.Main;
+import fr.Knux14.jSmashLight.ThreadMissclick;
 
 public class Case extends JPanel implements MouseListener {
 
@@ -52,12 +53,17 @@ public class Case extends JPanel implements MouseListener {
 	
 	@Override
 	public void paintComponent (Graphics g) {
+		super.paintComponent(g);
 		if (state == 0) {
 			g.drawImage(Main.case_1, 0, 0, getWidth(), getHeight(), null);
 		} else if (state == 1) {
 			g.drawImage(Main.case_2, 0, 0, getWidth(), getHeight(), null);
 		} else if (state == 2) {
 			g.drawImage(Main.case_3, 0, 0, getWidth(), getHeight(), null);
+		}
+		if (!game.canClick) {
+			g.setColor(new Color (249, 255, 143, 150));
+			g.fillRect(0, 0, getWidth(), getHeight());
 		}
 	}
 
@@ -85,6 +91,9 @@ public class Case extends JPanel implements MouseListener {
 				if (Main.gamemode.equals("click")){
 					change();
 				}
+			} else {
+				ThreadMissclick tmc = new ThreadMissclick(game);
+				tmc.start();
 			}
 		}
 	}

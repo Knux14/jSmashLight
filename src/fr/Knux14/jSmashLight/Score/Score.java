@@ -7,10 +7,14 @@ public class Score  implements Serializable {
     private static final long serialVersionUID = 4802478874549396808L;
     private int time;
     private String name;
-
-    public Score(String name, int time) {
+    private int errors;
+    private int size;
+    
+    public Score(String name, int time, int size, int errors) {
         this.time = time;
         this.name = name;
+        this.size = size;
+        this.errors = errors;
     }
     
     public int getTime() {
@@ -19,6 +23,14 @@ public class Score  implements Serializable {
 
     public String getName() {
         return name;
+    }
+    
+    public int getSize() {
+    	return size;
+    }
+    
+    public int getErrors() {
+    	return errors;
     }
     
 }

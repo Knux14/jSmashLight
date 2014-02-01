@@ -1,47 +1,43 @@
 package fr.Knux14.jSmashLight;
 
-import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
+import javax.swing.Timer;
 
 import fr.Knux14.jSmashLight.Gui.GamePanel;
-import fr.Knux14.jSmashLight.Gui.Panel;
-import fr.Knux14.jSmashLight.Gui.TopPanel;
 
-public class ThreadChrono extends Thread {
+public class ThreadChrono {
 
 	private GamePanel game;
-	private long start;
+	private Timer timer;
 	
-	public long ms = 0, secondes = 0, minutes = 0, heures = 0;
+	public int ms = 0, secondes = 0, minutes = 0, heures = 0;
+	
 	
 	public ThreadChrono(GamePanel game) {
 		this.game = game;
-	}
+		this.timer = new Timer(1, new ActionListener() {
 
-	public void run() {
-		start = System.nanoTime();
-		while (game.running) {
-			ms = (System.nanoTime() - start);
-		    ms /= 1000000L;
-			while (ms > 1000) {
-				secondes ++;
-				ms -= 1000;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ms++;
+				if (ms == 1000) {
+					ms = 0;
+					secondes++;
+				}
+				if (secondes == 60) {
+					secondes = 0;
+					minutes++;
+				}
+				if (minutes == 60) {
+					minutes = 0;
+					heures ++;
+				}
 			}
 			
-			while (secondes > 60) {
-				minutes ++;
-				secondes -= 60;
-			}
-			while (minutes > 60) {
-				heures++;
-				minutes -= 60;
-			}
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {}
-			updateCounters();
-		}
+		});
+		timer.start();
 	}
 	
 	public void updateCounters() {
