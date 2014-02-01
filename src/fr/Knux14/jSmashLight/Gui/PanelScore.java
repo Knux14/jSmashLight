@@ -29,22 +29,9 @@ public class PanelScore extends JPanel {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);
 		g.drawString("#" + id + ": " + scr.getName(), 25, 15);
-		g.drawString("Temps: " + getStringTime(), 150, 15);
+		g.drawString("Temps: " + scr.getTime().getTime(), 150, 15);
 		g.setColor(Color.white);
 		g.drawRect(1, 1, getWidth() - 1, getHeight()-1);
-	}
-	
-	public String getStringTime () {
-		second = scr.getTime() / 60;
-		while (second > 60) {
-			second -= 60;
-			minutes++;
-		}
-		while (minutes > 60) {
-			minutes -= 60;
-			hours++;
-		}
-		return hours + ":" + minutes + ":" + second;
 	}
 
 }

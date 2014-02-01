@@ -27,7 +27,7 @@ public class GameWin extends Panel {
 	public GameWin(Dimension d, Container container, Panel mainmenu, final GamePanel pan) {
 		super(d, container, mainmenu);
 		setLayout(null);
-		score = new JLabel("Votre score est: " + pan.tc.heures + ":" + pan.tc.minutes + ":" + pan.tc.secondes + ":" + pan.tc.ms);
+		score = new JLabel("Votre score est: " + pan.tc.time.getTime());
 		score.setLocation(50, 220);
 		score.setSize(500, 20);
 		score.setFont(Main.font.deriveFont(20f));
@@ -61,7 +61,7 @@ public class GameWin extends Panel {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pseudo.getText().isEmpty()){
 					ScoreboardManager sc = new ScoreboardManager();
-					sc.addScore(pseudo.getText(), pan.tc.getScore(), Main.size, pan.errors);
+					sc.addScore(pseudo.getText(), pan.tc.time, Main.size, pan.errors);
 					changePanel(pan.mainmenu);
 				}
 			}

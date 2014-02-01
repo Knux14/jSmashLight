@@ -22,6 +22,7 @@ public class Case extends JPanel implements MouseListener {
 		this.setId(id);
 		addMouseListener(this);
 		this.game = game;
+		setBackground(new Color(0, 0, 0, 0));
 	}
 	
 	public Case getCase() {
@@ -34,16 +35,19 @@ public class Case extends JPanel implements MouseListener {
 	}
 	
 	public void change() {
-		if (game.remaining == 1) {
+		if (game.remaining == 0) {
 			game.end();
 		} else {
 			setCase(0);
-			game.caseList.get(game.oldCase1).setCase(2);
-			Case c = getCase();
-			game.oldCase1 = c.id;
-			c.setCase(1);
 			game.remaining--;
+			game.caseList.get(game.oldCase1).setCase(2);
+			if ( game.remaining > 1) {
+				Case c = getCase();
+				game.oldCase1 = c.id;
+				c.setCase(1);
+			}
 		}
+		game.repaint();
 	}
 	
 	public void setCase(int state) {

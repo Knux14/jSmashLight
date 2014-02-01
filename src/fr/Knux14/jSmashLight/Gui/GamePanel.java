@@ -38,6 +38,7 @@ public class GamePanel extends Panel {
 			caseList.add(new Case(i, this));
 		}
 		
+		remaining = Main.defaultRemaining;
 		Random r = new Random();
 		int random1 = r.nextInt(caseList.size());
 		Case c1 = caseList.get(random1);
@@ -113,6 +114,7 @@ class CenterPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.drawImage(Main.backgrd, 0, 0, null);
 		if (!gp.canClick){
 			g.setColor(new Color (249, 255, 143, 150));
 			g.fillRect(0, 0, getWidth(), getHeight());

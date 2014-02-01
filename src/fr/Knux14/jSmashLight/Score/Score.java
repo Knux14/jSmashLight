@@ -5,20 +5,20 @@ import java.io.Serializable;
 public class Score  implements Serializable {
 
     private static final long serialVersionUID = 4802478874549396808L;
-    private int time;
+    private Time t;
     private String name;
     private int errors;
     private int size;
     
-    public Score(String name, int time, int size, int errors) {
-        this.time = time;
+    public Score(String name, Time t, int size, int errors) {
+        this.t = t;
         this.name = name;
         this.size = size;
         this.errors = errors;
     }
     
-    public int getTime() {
-        return time;
+    public Time getTime() {
+        return t;
     }
 
     public String getName() {

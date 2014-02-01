@@ -6,34 +6,25 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import fr.Knux14.jSmashLight.Gui.GamePanel;
+import fr.Knux14.jSmashLight.Score.Time;
 
 public class ThreadChrono {
 
 	private GamePanel game;
 	private Timer timer;
 	
-	public int ms = 0, secondes = 0, minutes = 0, heures = 0;
-	
+	public long ms;
+	public Time time;
 	
 	public ThreadChrono(GamePanel game) {
 		this.game = game;
+		time = new Time(0);
 		this.timer = new Timer(1, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ms++;
-				if (ms == 1000) {
-					ms = 0;
-					secondes++;
-				}
-				if (secondes == 60) {
-					secondes = 0;
-					minutes++;
-				}
-				if (minutes == 60) {
-					minutes = 0;
-					heures ++;
-				}
+				time.actualiser(ms);
 			}
 			
 		});
@@ -42,12 +33,8 @@ public class ThreadChrono {
 	
 	public void updateCounters() {
 		game.top.remainslab.setText("Coups restant: " + game.remaining);
-		game.top.timelab.setText("Temps: " + heures + ":" + minutes + ":" + secondes + ":" + ms);
+		game.top.timelab.setText("Temps: " + time.getTime());
 		game.top.errorsLab.setText("Erreurs: " + game.errors);
-	}
-
-	public int getScore() {
-		return ms + secondes * 1000 + minutes * 60000 + heures * 60*60000;
 	}
 	
 }
