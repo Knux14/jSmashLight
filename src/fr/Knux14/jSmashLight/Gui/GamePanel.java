@@ -76,7 +76,7 @@ public class GamePanel extends Panel {
 
 	public void end() {
 		running = false;
-		tc.stop();
+		tc.timer.stop();
 		changePanel(new GameWin(dim, getParent(), main, this));
 	}
 	

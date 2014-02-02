@@ -1,6 +1,7 @@
 package fr.Knux14.jSmashLight.Score;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 public class Time implements Serializable {
 
@@ -15,19 +16,12 @@ public class Time implements Serializable {
 	
 	public void actualiser (long ms) {
 		this.totalMS = ms;
-		this.ms = ms;
-		while (ms >= 1000) {
-			ms -= 1000;
-			secondes ++;
-		}
-		while (secondes >= 60) {
-			secondes -= 60;
-			minutes++;
-		}
-		while (minutes >= 60) {
-			minutes -= 60;
-			heures++;
-		}
+        heures = (int)TimeUnit.MILLISECONDS.toHours(totalMS);
+        totalMS -= TimeUnit.HOURS.toMillis(totalMS);
+        minutes = (int)TimeUnit.MILLISECONDS.toMinutes(totalMS);
+        totalMS -= TimeUnit.MINUTES.toMillis(minutes);
+        secondes = (int)TimeUnit.MILLISECONDS.toSeconds(totalMS);
+		ms = (int)(totalMS - TimeUnit.SECONDS.toMillis(secondes));
 	}
 	
 	public int getHeures () {
@@ -51,6 +45,6 @@ public class Time implements Serializable {
 	}
 	
 	public String getTime() {
-		return heures + ":" + minutes +":" + secondes + ":" + ms;
+		return String.format("%d:%d:%d:%d", heures, minutes, secondes, ms);
 	}
 }

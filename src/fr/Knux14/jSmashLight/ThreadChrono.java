@@ -11,7 +11,7 @@ import fr.Knux14.jSmashLight.Score.Time;
 public class ThreadChrono extends Thread {
 
 	private GamePanel game;
-	private Timer timer;
+	public Timer timer;
 
 	public long ms;
 	public Time time;
