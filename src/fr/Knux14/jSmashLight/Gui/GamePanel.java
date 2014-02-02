@@ -57,19 +57,7 @@ public class GamePanel extends Panel {
 		add(center, BorderLayout.CENTER);
 		running = true;
 		tc = new ThreadChrono(this);
-		new Thread() {
-			@Override
-			public void run() {
-				while (running) {
-					tc.updateCounters();
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}.start();
+		tc.start();
 	}
 	
 	@Override
@@ -88,7 +76,7 @@ public class GamePanel extends Panel {
 
 	public void end() {
 		running = false;
-		tc.stopTimer();
+		tc.stop();
 		changePanel(new GameWin(dim, getParent(), main, this));
 	}
 	

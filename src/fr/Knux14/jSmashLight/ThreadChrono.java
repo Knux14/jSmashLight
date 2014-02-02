@@ -8,14 +8,14 @@ import javax.swing.Timer;
 import fr.Knux14.jSmashLight.Gui.GamePanel;
 import fr.Knux14.jSmashLight.Score.Time;
 
-public class ThreadChrono {
+public class ThreadChrono extends Thread {
 
 	private GamePanel game;
 	private Timer timer;
-	
+
 	public long ms;
 	public Time time;
-	
+
 	public ThreadChrono(GamePanel game) {
 		this.game = game;
 		time = new Time(0);
@@ -26,19 +26,28 @@ public class ThreadChrono {
 				ms++;
 				time.actualiser(ms);
 			}
-			
+
 		});
-		timer.start();
 	}
-	
+
 	public void updateCounters() {
 		game.top.remainslab.setText("Coups restant: " + game.remaining);
 		game.top.timelab.setText("Temps: " + time.getTime());
 		game.top.errorsLab.setText("Erreurs: " + game.errors);
 	}
 	
-	public void stopTimer() {
+	@Override
+	public void run() {
+		timer.start();
+		while (game.running) {
+			updateCounters();
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		timer.stop();
 	}
-	
+
 }
