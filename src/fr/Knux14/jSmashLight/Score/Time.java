@@ -3,10 +3,6 @@ package fr.Knux14.jSmashLight.Score;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.datatype.Duration;
-
-import org.apache.commons.lang.time.DurationFormatUtils;
-
 public class Time implements Serializable {
 
 	private static final long serialVersionUID = 4677778376086309537L;
@@ -26,7 +22,8 @@ public class Time implements Serializable {
         convert -= TimeUnit.MINUTES.toMillis(minutes);
         secondes = TimeUnit.MILLISECONDS.toSeconds(convert);
         convert -= TimeUnit.SECONDS.toMillis(secondes);
-        ms = convert;
+        this.ms = convert;
+
 	}
 	
 	public long getHeures () {
