@@ -88,6 +88,7 @@ public class GamePanel extends Panel {
 
 	public void end() {
 		running = false;
+		tc.stopTimer();
 		changePanel(new GameWin(dim, getParent(), main, this));
 	}
 	

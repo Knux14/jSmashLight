@@ -18,7 +18,10 @@ public class Score  implements Serializable {
     }
     
     public Time getTime() {
-        return t;
+    	if (t != null)
+    		return t;
+    	else
+    		return new Time(999999);
     }
 
     public String getName() {

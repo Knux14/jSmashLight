@@ -8,9 +8,9 @@ public class ScoreComparator implements Comparator<Score> {
             long sc1 = score1.getTime().getTotalMS();
             long sc2 = score2.getTime().getTotalMS();
 
-            if (sc1 > sc2){
+            if (sc1 < sc2){
                 return -1;
-            }else if (sc1 < sc2){
+            }else if (sc1 > sc2){
                 return +1;
             }else{
                 return 0;
