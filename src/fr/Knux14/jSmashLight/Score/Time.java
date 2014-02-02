@@ -17,16 +17,16 @@ public class Time implements Serializable {
 		this.totalMS = ms;
 		this.ms = ms;
 		while (ms >= 1000) {
-			secondes ++;
 			ms -= 1000;
+			secondes ++;
 		}
 		while (secondes >= 60) {
-			minutes++;
 			secondes -= 60;
+			minutes++;
 		}
 		while (minutes >= 60) {
-			heures++;
 			minutes -= 60;
+			heures++;
 		}
 	}
 	
