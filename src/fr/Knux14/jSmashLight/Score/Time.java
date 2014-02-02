@@ -3,12 +3,15 @@ package fr.Knux14.jSmashLight.Score;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.datatype.Duration;
+
+import org.apache.commons.lang.time.DurationFormatUtils;
+
 public class Time implements Serializable {
 
 	private static final long serialVersionUID = 4677778376086309537L;
 	private long totalMS = 0;
-	private int heures = 0, minutes = 0, secondes = 0;
-	private long ms = 0;
+	private long heures = 0, minutes = 0, secondes = 0, ms = 0;
 	
 	public Time (long ms) {
 		actualiser (ms);
@@ -16,23 +19,25 @@ public class Time implements Serializable {
 	
 	public void actualiser (long ms) {
 		this.totalMS = ms;
-        heures = (int)TimeUnit.MILLISECONDS.toHours(totalMS);
-        totalMS -= TimeUnit.HOURS.toMillis(totalMS);
-        minutes = (int)TimeUnit.MILLISECONDS.toMinutes(totalMS);
-        totalMS -= TimeUnit.MINUTES.toMillis(minutes);
-        secondes = (int)TimeUnit.MILLISECONDS.toSeconds(totalMS);
-		ms = (int)(totalMS - TimeUnit.SECONDS.toMillis(secondes));
+        long convert = totalMS;
+        heures = TimeUnit.MILLISECONDS.toHours(convert);
+        convert -= TimeUnit.HOURS.toMillis(heures);
+        minutes = TimeUnit.MILLISECONDS.toMinutes(convert);
+        convert -= TimeUnit.MINUTES.toMillis(minutes);
+        secondes = TimeUnit.MILLISECONDS.toSeconds(convert);
+        convert -= TimeUnit.SECONDS.toMillis(secondes);
+        ms = convert;
 	}
 	
-	public int getHeures () {
+	public long getHeures () {
 		return heures;
 	}
 	
-	public int getMinutes () {
+	public long getMinutes () {
 		return minutes;
 	}
 	
-	public int getSeconds() {
+	public long getSeconds() {
 		return secondes;
 	}
 	
