@@ -24,6 +24,7 @@ public class ThreadChrono {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ms++;
+				time.actualiser(ms);
 			}
 			
 		});
@@ -31,7 +32,6 @@ public class ThreadChrono {
 	}
 	
 	public void updateCounters() {
-		time.actualiser(ms);
 		game.top.remainslab.setText("Coups restant: " + game.remaining);
 		game.top.timelab.setText("Temps: " + time.getTime());
 		game.top.errorsLab.setText("Erreurs: " + game.errors);
