@@ -19,15 +19,14 @@ public class ThreadChrono extends Thread {
 	public ThreadChrono(GamePanel game) {
 		this.game = game;
 		time = new Time(0);
-		this.timer = new Timer(1, new ActionListener() {
-
+		ActionListener task = new ActionListener() {
+			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				ms++;
-				time.actualiser(ms);
 			}
-
-		});
+		};
+		this.timer = new Timer(1, task);
 	}
 
 	public void updateCounters() {
@@ -40,6 +39,7 @@ public class ThreadChrono extends Thread {
 	public void run() {
 		timer.start();
 		while (game.running) {
+			time.actualiser(ms);
 			updateCounters();
 			try {
 				Thread.sleep(10);
