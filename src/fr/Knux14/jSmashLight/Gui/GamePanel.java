@@ -80,7 +80,7 @@ public class GamePanel extends Panel implements MouseListener {
 
 	public void end() {
 		running = false;
-		tc.timer.stop();
+		//tc.timer.stop();
 		changePanel(new GameWin(dim, getParent(), main, this));
 	}
 

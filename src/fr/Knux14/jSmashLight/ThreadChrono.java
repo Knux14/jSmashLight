@@ -11,7 +11,7 @@ import fr.Knux14.jSmashLight.Score.Time;
 public class ThreadChrono extends Thread {
 
 	private GamePanel game;
-	public Timer timer;
+	//public Timer timer;
 
 	public long ms;
 	public Time time;
@@ -19,14 +19,14 @@ public class ThreadChrono extends Thread {
 	public ThreadChrono(GamePanel game) {
 		this.game = game;
 		time = new Time(0);
-		ActionListener task = new ActionListener() {
+		/*ActionListener task = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ms++;
 			}
 		};
-		this.timer = new Timer(1, task);
+		this.timer = new Timer(1, task);*/
 	}
 
 	public void updateCounters() {
@@ -37,9 +37,9 @@ public class ThreadChrono extends Thread {
 	
 	@Override
 	public void run() {
-		timer.start();
+		long startTime = System.currentTimeMillis();
 		while (game.running) {
-			time.actualiser(ms);
+			time.actualiser(startTime - System.currentTimeMillis());
 			updateCounters();
 			try {
 				Thread.sleep(10);
@@ -47,7 +47,6 @@ public class ThreadChrono extends Thread {
 				e.printStackTrace();
 			}
 		}
-		timer.stop();
 	}
 
 }

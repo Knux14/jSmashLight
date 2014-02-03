@@ -53,7 +53,6 @@ public class TopPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				gamePanel.running = false;
-				gamePanel.tc.timer.stop();
 				gamePanel.changePanel(gamePanel.mainmenu);
 			}		
 		}, new Point(280, 5)));
