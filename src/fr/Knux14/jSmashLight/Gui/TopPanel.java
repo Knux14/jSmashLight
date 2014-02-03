@@ -2,6 +2,9 @@ package fr.Knux14.jSmashLight.Gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -44,7 +47,16 @@ public class TopPanel extends JPanel {
 		errorsLab.setForeground(Color.white);
 		errorsLab.setBackground(new Color(0, 0, 0, 0));
 		add(errorsLab);
-		
+
+		add(new Button("Quitter", new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				gamePanel.running = false;
+				gamePanel.tc.timer.stop();
+				gamePanel.changePanel(gamePanel.mainmenu);
+			}		
+		}, new Point(280, 5)));
 	}
 	
 }

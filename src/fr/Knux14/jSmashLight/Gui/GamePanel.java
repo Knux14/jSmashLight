@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,8 +15,9 @@ import javax.swing.JPanel;
 
 import fr.Knux14.jSmashLight.Main;
 import fr.Knux14.jSmashLight.ThreadChrono;
+import fr.Knux14.jSmashLight.ThreadMissclick;
 
-public class GamePanel extends Panel {
+public class GamePanel extends Panel implements MouseListener {
 
 	private static final long serialVersionUID = -1010103893984671971L;
 	private Panel main;
@@ -22,13 +25,13 @@ public class GamePanel extends Panel {
 	public TopPanel top;
 	private CenterPanel center;
 	public boolean running;
-	public int remaining = 5, errors = 0;
+	public int remaining = 100, errors = 0;
 	public boolean canClick = true;
 	public ArrayList<Case> caseList;
 	public int oldCase1, oldCase2;
 	public ThreadChrono tc;
 	
-	public GamePanel(Dimension d, Container container, Panel mainmenu) {
+	public GamePanel(Dimension d, Container container, final Panel mainmenu) {
 		super(d, container, mainmenu);
 		setLayout(new BorderLayout());
 		this.main = mainmenu;
@@ -55,6 +58,7 @@ public class GamePanel extends Panel {
 		center = new CenterPanel(this);
 		add(top, BorderLayout.NORTH);
 		add(center, BorderLayout.CENTER);
+		addMouseListener(this);
 		running = true;
 		tc = new ThreadChrono(this);
 		tc.start();
@@ -79,6 +83,24 @@ public class GamePanel extends Panel {
 		tc.timer.stop();
 		changePanel(new GameWin(dim, getParent(), main, this));
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		ThreadMissclick tmc = new ThreadMissclick(this);
+		tmc.start();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 	
 }
 

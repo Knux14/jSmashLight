@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import fr.Knux14.jSmashLight.Main;
 import fr.Knux14.jSmashLight.Score.Score;
 
 public class PanelScore extends JPanel {
@@ -25,11 +26,18 @@ public class PanelScore extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(135, 135, 135));
+		if (scr.getErrors() == 0){
+			g.setColor(new Color(135, 135, 135));
+		} else {
+			g.setColor(new Color(100, 100, 100));
+		}
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);
-		g.drawString("#" + id + ": " + scr.getName(), 25, 15);
-		g.drawString("Temps: " + scr.getTime().getTime(), 150, 15);
+		g.setFont(Main.font.deriveFont(10f));
+		g.drawString("#" + id + ": " + scr.getName(), 25, 13);
+		g.drawString("Temps: " + scr.getTime().getTime(), 150, 13);
+		g.drawString(scr.getSize() + "x" + scr.getSize() + " / " + scr.getClickMode(), 25, 27);
+		g.drawString("Erreurs: " + (scr.getErrors() == 0 ? "Perfect!" : scr.getErrors()), 150, 27);
 		g.setColor(Color.white);
 		g.drawRect(1, 1, getWidth() - 1, getHeight()-1);
 	}

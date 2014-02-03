@@ -32,7 +32,7 @@ public class Main {
 			config = new PropertiesConfiguration("config.ini");
 			config.setAutoSave(true);
 			config.setReloadingStrategy(new FileChangedReloadingStrategy());
-			gamemode = config.getString("gamemode", "click");
+			gamemode = config.getString("clickmode", "click");
 			size = config.getInt("size", 4);
 			defaultRemaining = config.getInt("defaultremaining", 100);
 			config.save();
@@ -43,6 +43,16 @@ public class Main {
 		}
 	}
 
+	public static void saveConfig() 
+	{
+		try {
+			config.setProperty("clickmode", gamemode);
+			config.setProperty("size", size);
+			config.save();
+		} catch (ConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static void loadPict(){
 		try {

@@ -29,9 +29,9 @@ public class ScoreboardManager {
 		Collections.sort(scores, comparator);
 	}
 
-	public void addScore(String name, Time t, int size, int errors) {
+	public void addScore(String name, String gamemode, Time t, int size, int errors) {
 		loadScoreFile();
-		scores.add(new Score(name, t, size, errors));
+		scores.add(new Score(name, gamemode, t, size, errors));
 		updateScoreFile();
 	}
 

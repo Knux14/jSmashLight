@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import fr.Knux14.jSmashLight.Main;
 import fr.Knux14.jSmashLight.Score.Score;
 import fr.Knux14.jSmashLight.Score.ScoreboardManager;
+import fr.Knux14.jSmashLight.Score.Time;
 
 public class PanelHighscores extends Panel{
 
@@ -30,7 +31,6 @@ public class PanelHighscores extends Panel{
 
 	public PanelHighscores(Dimension d, Container container, final Panel main) {
 		super(d, container, main);
-		setLayout(null);
 		sbm = new ScoreboardManager();
 		scorelist = new JList<>();    
 		scorelist.setCellRenderer(new CellRenderer()); 
@@ -50,7 +50,7 @@ public class PanelHighscores extends Panel{
 				changePanel(main);				
 			}
 		}, new java.awt.Point(getWidth() / 2 - 100, 600 - 100)));
-		initButtons();
+		initButtons();		
 	}
 
 	public void updateScore() {
