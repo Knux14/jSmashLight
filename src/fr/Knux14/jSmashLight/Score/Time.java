@@ -27,19 +27,19 @@ public class Time implements Serializable {
 	}
 	
 	public long getHeures () {
-		return heures;
+		return heures *= -1;
 	}
 	
 	public long getMinutes () {
-		return minutes;
+		return minutes *= -1;
 	}
 	
 	public long getSeconds() {
-		return secondes;
+		return secondes *= -1;
 	}
 	
 	public long getMs() {
-		return ms;
+		return ms *= -1;
 	}
 	
 	public long getTotalMS() {
@@ -47,6 +47,6 @@ public class Time implements Serializable {
 	}
 	
 	public String getTime() {
-		return String.format("%d:%d:%d:%d", heures, minutes, secondes, ms);
+		return String.format("%d:%d:%d:%d", heures *= -1, minutes *= -1, secondes *= -1, ms *= -1);
 	}
 }
